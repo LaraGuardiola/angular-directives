@@ -1,12 +1,25 @@
 <nav>
   <ul class="pagination">
+    <li 
+      class="page-item"
+      [ngClass]="{ disabled: currentPage === 0 }"
+    >
+      <a (click)="currentPage = currentPage - 1" class="page-link">Prev</a>
+    </li>
     <!-- accesing the images array with an ngFor directive, using aliasing for getting the index-->
     <!-- [ngClass] evaluates if i (the index) equals to the current page property, if it does it applies active class-->
     <li 
       class="page-item"
       [ngClass]="{ active: i === currentPage }" 
-      *ngFor="let image of images; let i = index">
-      <a href="" class="page-link">{{i + 1}}</a>
+      *ngFor="let image of images; let i = index"
+    >
+      <a class="page-link" (click)="currentPage = i">{{ i + 1 }}</a>
+    </li>
+    <li 
+      class="page-item"
+      [ngClass]="{ disabled: currentPage === images.length - 1 }"
+    >
+      <a class="page-link" (click)="currentPage = currentPage + 1">Next</a>
     </li>
   </ul>
 </nav>
