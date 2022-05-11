@@ -19,7 +19,12 @@ export class ClassDirective {
     },50)*/
   }
 
-  @Input() set backgroundColor(color: string){
+  /*@Input() set backgroundColor(color: string){
+    this.element.nativeElement.style.backgroundColor = color
+  }*/
+
+  //other way to do it without the need to specify the property name on the html tag
+  @Input('appClass') set backgroundColor(color: string){
     this.element.nativeElement.style.backgroundColor = color
   }
 
