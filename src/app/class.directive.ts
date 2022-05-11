@@ -24,8 +24,18 @@ export class ClassDirective {
   }*/
 
   //other way to do it without the need to specify the property name on the html tag
-  @Input('appClass') set backgroundColor(color: string){
+  /*@Input('appClass') set backgroundColor(color: string){
     this.element.nativeElement.style.backgroundColor = color
+  }*/
+
+  @Input('appClass') set classNames(classObj: any){
+    for(let key in classObj){
+      if(classObj[key]){
+        this.element.nativeElement.classList.add(key)
+      }else{
+        this.element.nativeElement.classList.remove(key)
+      }
+    }
   }
 
 }
