@@ -1,11 +1,33 @@
-<nav>
+<!-- accesing the images array with an ngFor directive, using aliasing for getting the index-->
+<!-- [ngClass] evaluates if i (the index) equals to the current page property, if it does it applies active class-->
+<!-- ng-container is a special tag that does not create an html element, and allow us to add more than 1-->
+
+<!--<nav>
   <ul class="pagination">
     <li class="page-item" [ngClass]="{ disabled: currentPage === 0 }">
       <a (click)="currentPage = currentPage - 1" class="page-link">Prev</a>
     </li>
-    <!-- accesing the images array with an ngFor directive, using aliasing for getting the index-->
-    <!-- [ngClass] evaluates if i (the index) equals to the current page property, if it does it applies active class-->
-    <!-- ng-container is a special tag that does not create an html element, and allow us to add more than 1-->
+    <ng-container *ngFor="let image of images; let i = index">
+      <li 
+        class="page-item" 
+        [ngClass]="{ active: i === currentPage }" 
+        *ngIf="checkIndexPage(i)"
+      >
+        <a class="page-link" (click)="currentPage = i">{{ i + 1 }}</a>
+      </li>
+    </ng-container>
+    <li class="page-item" [ngClass]="{ disabled: currentPage === images.length - 1 }">
+      <a class="page-link" (click)="currentPage = currentPage + 1">Next</a>
+    </li>
+  </ul>
+</nav> -->
+
+<!-- whenever you set a directive as an attribute it creates an instance of that directive class-->
+<nav>
+  <ul appClass class="pagination">
+    <li class="page-item" [ngClass]="{ disabled: currentPage === 0 }">
+      <a (click)="currentPage = currentPage - 1" class="page-link">Prev</a>
+    </li>
     <ng-container *ngFor="let image of images; let i = index">
       <li 
         class="page-item" 
@@ -22,7 +44,7 @@
 </nav>
 
 <div>
-  <h4>{{ images[currentPage].title }}</h4>
+  <h4 appClass [backgroundColor]=" 'magenta' ">{{ images[currentPage].title }}</h4>
   <img [src]="images[currentPage].url" alt="">
   <!-- ALTERNATIVE WAY <img src="{{images[currentPage].url}}">-->
 </div>
